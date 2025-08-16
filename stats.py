@@ -1,16 +1,30 @@
+def sort_by_count(items):
+    return items["count"]
+
 def count_words(text):
     return len(text.split())
 
 def count_character_usage(text):
-    char_list = list(text)
-    char_count = len(char_list)
+    character_list = list(text)
 
-    characters = {}
-    for i in range(char_count):
-        char = char_list[i].lower()
-        if char in characters:
-            characters[char] = characters[char] + 1
+    character_dict = {}
+    for c in character_list:
+        character = c.lower()
+        if character in character_dict:
+            character_dict[character] = character_dict[character] + 1
         else:
-            characters[char] = 1
+            character_dict[character] = 1
 
-    return characters
+    return character_dict
+
+def sort_character_usage_by_count(usage_dict):
+    character_list = list(usage_dict)
+
+    dict_list = []
+    for c in character_list:
+        if c.isalpha():
+            count = usage_dict[c]
+            dict_list.append({"char": c, "count": count})
+
+    dict_list.sort(reverse=True, key=sort_by_count)
+    return dict_list
